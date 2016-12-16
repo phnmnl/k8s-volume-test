@@ -23,3 +23,33 @@ Create a PersistentVolumeClaim using `pvc.yml`:
 ```bash
 kubectl apply -f pvc.yml
 ```
+
+Perform the write test:
+
+```bash
+kubectl apply -f write.yml
+```
+
+Check the write test `STATUS`, and wait until it is `Completed`:
+
+```bash
+kubectl get pods --show-all
+```
+
+Get the output of the writing test:
+
+```bash
+kubectl logs $(kubectl get pods --show-all -o jsonpath='{.items[?(@.spec.containers[*].name=="write")].metadata.name}')
+```
+
+Perform the read test:
+
+```bash
+kubectl apply -f read.yml
+```
+
+Get the output of the reading test:
+
+```bash
+kubectl logs $(kubectl get pods --show-all -o jsonpath='{.items[?(@.spec.containers[*].name=="read")].metadata.name}')
+```
