@@ -48,6 +48,12 @@ Perform the read test:
 kubectl apply -f read.yml
 ```
 
+Check the write test `STATUS`, and wait until it is `Completed`:
+
+```bash
+kubectl get pods --show-all
+```
+
 Get the output of the reading test:
 
 ```bash
