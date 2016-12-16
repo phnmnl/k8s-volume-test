@@ -1,17 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: busybox-write
+  name: alpine-write
 spec:
   template:
     metadata:
-      name: busybox-write
+      name: alpine-write
     spec:
       containers:
-      - name: busybox-write
-        image: busybox
+      - name: alpine-write
+        image: alpine
         command: ["sh","-c"]
-        args: ["dd if=/dev/zero of=/mnt/pv/test.img bs=1G count=1 oflag=dsync"]
+        args:
+          - dd if=/dev/zero of=/mnt/pv/test.img bs=1G count=1 oflag=dsync
         volumeMounts:
         - mountPath: "/mnt/pv"
           name: test-volume
