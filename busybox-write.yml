@@ -11,4 +11,11 @@ spec:
       - name: busybox-write
         image: busybox
         command: ["dd","if=/dev/zero","of=/mnt/pv/test.img","bs=1G","count=1","oflag=dsync"]
+      volumeMounts:
+        - mountPath: "/mnt/pv"
+          name: test-volume
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: test-claim
       restartPolicy: Never
